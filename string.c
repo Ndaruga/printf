@@ -14,16 +14,16 @@ char *print_s(va_list list)
 	char *s;
 	char *p;
 	int strln;
-	char *dest;
 
-	s = va_arg(list, int);
+	s = va_arg(list, char *);
+	if (s == NULL)
+		s = "(null)";
+
 	strln = _strlen(s);
 
 	p = malloc(sizeof(char) * strln + 1);
-	if (p = NULL)
+	if (p == NULL)
 		return (NULL);
 
-	p = _strcpy(dest, s);
-
-	return (p);
+	return (_strcpy(p, s));
 }

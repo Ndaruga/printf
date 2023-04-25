@@ -1,7 +1,7 @@
 #include "main.h"
 #include "stdarg.h"
 #include "stdlib.h" /* malloc */
-
+#include "unistd.h"
 
 /**
  * write_buffer - prints buffer, then frees it and frees va_list
