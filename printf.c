@@ -88,7 +88,12 @@ int _printf(const char *format, ...)
  */
 int main(void)
 {
-	_printf("\n\n\nHere's some examples of what you could do with this custom_printf function!\n\n\n");
-	_printf("\nPrinting Strings, Characters, and Numbers...... %s %c%drld\n\n", "Hello", 'W', 0);
+    char *s;
+    char str[] = "Hello world";
+
+    s = "s";
+
+	_printf("\nHere's some examples of this custom_printf function!\n\n");
+	_printf("\t%s %c\n\n", str, s);
 	return (0);
 }

@@ -15,7 +15,6 @@ char* (*get_func(char i))(va_list)
 	print_fn keys[] = {
 		{'c', print_c},
 		{'s', print_s},
-		{'d', print_d},
 		{'\0', NULL}
 	};
 

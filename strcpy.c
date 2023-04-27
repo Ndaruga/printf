@@ -2,25 +2,6 @@
 #include "stdio.h"
 
 /**
- * _strlen - returns the length of a string
- * @s: Characters to count
- * Return: count integer
- */
-
-int _strlen(char *s)
-{
-	int count = 0;
-	char i;
-
-	for (i = *s; i != '\0'; i = *++s)
-	{
-		count++;
-	}
-	return (count);
-}
-
-
-/**
  * _strcpy - function to copy a string from src to dest
  * @dest: destination
  * @src: source
