@@ -2,6 +2,13 @@
 #include "stdlib.h"
 #include "stdarg.h"
 
+/**
+ * _printf - cudtom printf fn
+ * 
+ * @param format 
+ * @param ... 
+ * @return int 
+ */
 
 int _printf(const char *format, ...)
 {

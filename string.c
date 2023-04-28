@@ -4,9 +4,9 @@
 
 /**
  * print_c - handle function for %s
- * 
- * @param list 
- * Return char* 
+ *
+ * @param list
+ * Return char*
  */
 
 char *print_s(va_list list)
@@ -21,7 +21,7 @@ char *print_s(va_list list)
 
 	strln = _strlen(s);
 
-	p = malloc(sizeof(char) * strln + 1);
+	p = malloc(sizeof(char) * strln + 1); /* malloc */
 	if (p == NULL)
 		return (NULL);
 
