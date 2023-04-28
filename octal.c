@@ -9,40 +9,40 @@
 
 char *itoOctal(va_list list)
 {
-	int j = 0, eights = 1;
-	int i, k;
+	int h = 0, eights = 1;
+	int i, m;
 	char *s;
 
-	k = va_arg(list, int);
-	i = k;
+	m = va_arg(list, int);
+	i = m;
 
 	s = malloc(sizeof(char) * 12); /* malloc up to max int in octal*/
 	if (s == NULL)
 		return (NULL);
 
-	if (k < 0)
+	if (m < 0)
 	{
 		s[0] = 1 + '0';
-		j++;
-		k *= -1;
+		h++;
+		m *= -1;
 		i *= -1;
 	}
 
 	/* find largest power of 8 it's divisible by */
-	while (k > 1)
+	while (m > 1)
 	{
-		k /= 8;
+		m /= 8;
 		eights *= 8;
 	}
 
 	/* divide and store octal num */
 	while (eights > 0)
 	{
-		s[j++] = (i / eights + '0');
+		s[h++] = (i / eights + '0');
 		i %= eights;
 		eights /= 8;
 	}
-	s[j] = '\0';
+	s[h] = '\0';
 
 	return (s);
 }
