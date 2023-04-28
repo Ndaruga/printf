@@ -10,7 +10,7 @@
 
 char *rev_string(va_list list)
 {
-    char *rev_str;
+	char *rev_str;
 	char *str;
 	int i = 0, len, j;
 
@@ -24,7 +24,7 @@ char *rev_string(va_list list)
 	if (rev_str == NULL)
 		return (NULL);
 
-	for(j = (len - 1); j >= 0; j--)
+	for (j = (len - 1); j >= 0; j--)
 	{
 		rev_str[i++] = str[j];
 	}

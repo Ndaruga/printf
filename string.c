@@ -3,10 +3,10 @@
 #include "stdlib.h"
 
 /**
- * print_c - handle function for %s
+ * print_s - handle function for %s
  *
- * @param list
- * Return char*
+ * @list: -
+ * Return: char
  */
 
 char *print_s(va_list list)
