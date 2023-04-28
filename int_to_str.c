@@ -1,5 +1,7 @@
 #include "main.h"
 #include "stdio.h"
+#include "stdlib.h"
+
 
 /**
  * _itos - converts an int a string

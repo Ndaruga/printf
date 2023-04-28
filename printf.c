@@ -91,19 +91,3 @@ int _printf(const char *format, ...)
 	write_buffer(buffer, len, list);
 	return (total_len);
 }
-
-/**
- * main - sample main program
- * Return: 0 on sucess
- */
-int main(void)
-{
-	char *s;
-	char str[] = "Hello world";
-
-	s = "s";
-
-	_printf("\nHere's some examples of this custom_printf function!\n\n");
-	_printf("\t%s %c\n\n", str, s);
-	return (0);
-}

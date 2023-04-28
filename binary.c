@@ -1,5 +1,7 @@
 #include "main.h"
 #include "stdio.h"
+#include "stdlib.h"
+
 
 /**
  * itob - change integer to binary

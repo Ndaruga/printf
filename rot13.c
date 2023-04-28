@@ -1,5 +1,7 @@
 #include "main.h"
 #include "stdio.h"
+#include "stdlib.h"
+
 /**
  * rot13 - string encryption with rot13
  * @list: string to be changed
