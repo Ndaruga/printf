@@ -23,6 +23,7 @@ char *rot13(va_list list);
 
 char *itoOctal(va_list list);
 
+char *itob(va_list list);
 
 char *print_s(va_list list);
 char *print_c(va_list list);
