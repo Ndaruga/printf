@@ -28,14 +28,14 @@ char *itoOctal(va_list list)
 		i *= -1;
 	}
 
-	/* find biggest power of 8 it's divisible by */
+	/* find largest power of 8 it's divisible by */
 	while (k > 1)
 	{
 		k /= 8;
 		eights *= 8;
 	}
 
-	/* divide down and store octal num */
+	/* divide and store octal num */
 	while (eights > 0)
 	{
 		s[j++] = (i / eights + '0');
