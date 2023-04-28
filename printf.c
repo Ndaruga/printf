@@ -4,10 +4,10 @@
 
 /**
  * _printf - cudtom printf fn
- * 
- * @param format 
- * @param ... 
- * @return int 
+ *
+ * @param format Initial string
+ * @param ...
+ * Return: string with characters and format sprcifiers expanded
  */
 
 int _printf(const char *format, ...)
@@ -55,8 +55,10 @@ int _printf(const char *format, ...)
 				if (f == NULL)  /* handle fake id */
 				{
 					len = check_buffer_overflow(buffer, len);
-					buffer[len++] = '%'; total_len++;
-					buffer[len++] = format[i]; total_len++;
+					buffer[len++] = '%';
+					total_len++;
+					buffer[len++] = format[i];
+					total_len++;
 				}
 				else /* return string, copy to buffer */
 				{
@@ -78,7 +80,8 @@ int _printf(const char *format, ...)
 					{
 						len = check_buffer_overflow(buffer, len);
 						buffer[len++] = str[j];
-						total_len++; j++;
+						total_len++;
+						j++;
 					}
 					free(str);
 				}
@@ -95,10 +98,10 @@ int _printf(const char *format, ...)
  */
 int main(void)
 {
-    char *s;
-    char str[] = "Hello world";
+	char *s;
+	char str[] = "Hello world";
 
-    s = "s";
+	s = "s";
 
 	_printf("\nHere's some examples of this custom_printf function!\n\n");
 	_printf("\t%s %c\n\n", str, s);
