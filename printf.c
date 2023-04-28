@@ -3,92 +3,6 @@
 #include "stdarg.h"
 
 /**
- * process_text_format - processing the text format
- * of the input string and copying it into the buffer.
- *
- * @format: text format
- * @buffer: buffer
- * @len: len
- * @total_len: len of str
- * Return - None
- */
-
-void process_text_format(char *format, char *buffer, int *len, int *total_len)
-{
-	while (*format != '\0')
-	{
-		if (*format != '%')
-		{
-			*len = check_buffer_overflow(buffer, *len);
-			buffer[(*len)++] = *format++;
-			(*total_len)++;
-		}
-		else
-		{
-			format++;
-			break;
-		}
-	}
-}
-
-/**
- * valid_specifier - processing a valid format specifier
- *  and copying its string representation into the buffer.
- *
- * @format: text format
- * @buffer: buffer
- * @len: len
- * @total_len: len of str
- * @list: lis
- * Return - None
- */
-
-
-void valid_specifier(char *format, char *buffer,
-int *len, int *total_len, va_list list)
-{
-	char *str, *(*f)(va_list);
-
-	f = get_func(*format);
-	if (f != NULL)
-	{
-		str = f(list);
-		if (str != NULL)
-		{
-			int j = 0;
-
-			while (str[j] != '\0')
-			{
-				*len = check_buffer_overflow(buffer, *len);
-				buffer[(*len)++] = str[j++];
-				(*total_len)++;
-			}
-			free(str);
-		}
-	}
-}
-
-/**
- * invalid_specifier - processing an invalid format specifier
- * and copying it into the buffer as a regular character.
- *
- * @format: text format
- * @buffer: buffer
- * @len: len
- * @total_len: len of str
- * Return - None
- */
-
-void invalid_specifier(char *format, char *buffer, int *len, int *total_len)
-{
-	*len = check_buffer_overflow(buffer, *len);
-	buffer[(*len)++] = '%';
-	(*total_len)++;
-	buffer[(*len)++] = *format;
-	(*total_len)++;
-}
-
-/**
  * _printf - custom printf fn
  *
  * @format: Initial string
@@ -98,43 +12,79 @@ void invalid_specifier(char *format, char *buffer, int *len, int *total_len)
 
 int _printf(const char *format, ...)
 {
-	int len = 0, total_len = 0;
-	char *buffer = create_buffer();
+	int len = 0, total_len = 0, i = 0, j = 0;
 	va_list list;
+	char *buffer, *str;
+	char* (*f)(va_list);
+
+	if (format == NULL)
+		return (-1);
+
+	buffer = create_buffer();
+	if (buffer == NULL)
+		return (-1);
 
 	va_start(list, format);
-	if ((buffer == NULL) || (format == NULL))
-		return (-1);
-	while (*format != '\0')
+
+	while (format[i] != '\0')
 	{
-		if (*format == '%')
+		if (format[i] != '%') /* copy format into buffer until you encounter '%' */
 		{
-			format++;
-			if (*format == '\0')
+			len = check_buffer_overflow(buffer, len);
+			buffer[len++] = format[i++];
+			total_len++;
+		}
+		else /* if %, ... */
+		{
+			i++;
+			if (format[i] == '\0')
 			{
 				va_end(list);
 				free(buffer);
 				return (-1);
 			}
-			else if (*format == '%')
+			if (format[i] == '%')
 			{
 				len = check_buffer_overflow(buffer, len);
-				buffer[len++] = *format++;
+				buffer[len++] = format[i];
 				total_len++;
 			}
 			else
 			{
-				process_text_format((char *)format - 1, buffer, &len, &total_len);
-				valid_specifier(format, buffer, &len, &total_len, list);
-				while (*format != '\0' && !is_valid_specifier(*format))
-					invalid_specifier(format++, buffer, &len, &total_len);
-			}
+				f = get_func(format[i]); /* grab function */
+				if (f == NULL)  /* handle fake id */
+				{
+					len = check_buffer_overflow(buffer, len);
+					buffer[len++] = '%'; total_len++;
+					buffer[len++] = format[i]; total_len++;
+				}
+				else /* return string, copy to buffer */
+				{
+					str = f(list);
+					if (str == NULL)
+					{
+						va_end(list);
+						free(buffer);
+						return (-1);
+					}
+					if (format[i] == 'c' && str[0] == '\0')
+					{
+						len = check_buffer_overflow(buffer, len);
+						buffer[len++] = '\0';
+						total_len++;
+					}
+					j = 0;
+					while (str[j] != '\0')
+					{
+						len = check_buffer_overflow(buffer, len);
+						buffer[len++] = str[j];
+						total_len++; j++;
+					}
+					free(str);
+				}
+			} i++;
 		}
-		process_text_format((char *)format++, buffer, &len, &total_len);
 	}
-
 	write_buffer(buffer, len, list);
-	va_end(list);
-	free(buffer);
 	return (total_len);
 }
