@@ -8,17 +8,24 @@
 #define HASH 8
 #define SPACE 16
 #define UNUSED(x) (void)(x)
-#define SIZE_BUFFER 1024
+#define sz_BUFFER 1024
 
 
 int _printf(const char *format, ...);
 
-int print_char(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_string(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_percent(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+int print_char(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_string(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_percent(va_list types, char buffer[], int f, int w, int p, int sz);
+
+
+int print_int(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_binary(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_unsigned(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_octal(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_hexadeci(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_hexa_up(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_hexa(va_list types, char map_to[], char buffer[], int f,
+char flag_ch, int w, int p, int sz);
 
 
 /**
