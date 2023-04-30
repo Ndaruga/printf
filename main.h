@@ -8,7 +8,7 @@
 #define HASH 8
 #define SPACE 16
 #define UNUSED(x) (void)(x)
-#define sz_BUFFER 1024
+#define SIZE_BUFFER 1024
 
 
 int _printf(const char *format, ...);
@@ -26,6 +26,15 @@ int print_hexadec(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_hexa_up(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_hexa(va_list types, char map_to[], char buffer[], int f,
 char flag_ch, int w, int p, int sz);
+
+int buff_flags(const char *format, int *i);
+int buff_width(const char *format, int *i, va_list list);
+int buff_precision(const char *format, int *i, va_list list);
+int buff_size(const char *format, int *i);
+
+int print_reverse(va_list types, char buffer[],	int f, int w, int p, int sz);
+int print_rot13str(va_list types, char buffer[], int f, int w, int p, int sz);
+
 
 
 /**

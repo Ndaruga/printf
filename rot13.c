@@ -3,38 +3,52 @@
 #include "stdlib.h"
 
 /**
- * rot13 - string encryption with rot13
- * @list: string to be changed
- * Return: new modified string
+ * print_rot13str - Print a string in rot13.
+ * @types: Argument list
+ * @buffer: array for buffer
+ * @f:  Calc flags
+ * @w: get the width
+ * @p: Precision
+ * @sz: Size
+ * Return: Numbers of chars printed
  */
-char *rot13(va_list list)
+
+int print_rot13str(va_list types, char buffer[], int f, int w, int p, int sz)
 {
-	int i = 0;
-	char *s;
-	char *nw_str;
+	char x;
+	char *str;
+	unsigned int i, j;
+	int count = 0;
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	s = va_arg(list, char *); /* store va_arg to only access argument once */
+	str = va_arg(types, char *);
+	UNUSED(buffer);
+	UNUSED(f);
+	UNUSED(w);
+	UNUSED(p);
+	UNUSED(sz);
 
-	nw_str = malloc(sizeof(char) * (_strlen(s) + 1));
-	if (nw_str == NULL)
-		return (NULL);
-
-	/* iterate s and assign rot13 char to nw_str */
-	while (s[i] != '\0')
+	if (str == NULL)
+		str = "(AHYY)";
+	for (i = 0; str[i]; i++)
 	{
-		if ((s[i] >= 'A' && s[i] <= 'M') || (s[i] >= 'a' && s[i] <= 'm'))
+		for (j = 0; in[j]; j++)
 		{
-			nw_str[i] = s[i] + 13;
+			if (in[j] == str[i])
+			{
+				x = out[j];
+				write(1, &x, 1);
+				count++;
+				break;
+			}
 		}
-		else if ((s[i] >= 'N' && s[i] <= 'Z') || (s[i] >= 'n' && s[i] <= 'z'))
+		if (!in[j])
 		{
-			nw_str[i] = s[i] - 13;
+			x = str[i];
+			write(1, &x, 1);
+			count++;
 		}
-		else
-			(nw_str[i] = s[i]);
-		i++;
 	}
-	nw_str[i] = '\0';
-
-	return (nw_str);
+	return (count);
 }

@@ -3,32 +3,43 @@
 #include "stdlib.h"
 
 /**
- * rev_string - reverses a string
- * @list: string to reverse
- * Return: reversed string
+ * print_reverse - Prints reverse string.
+ * @types: Argument list
+ * @buffer: array for buffer
+ * @f:  Calc flags
+ * @w: get the width
+ * @p: Precision
+ * @sz: Size
+ * Return: Numbers of chars printed
  */
 
-char *rev_string(va_list list)
+int print_reverse(va_list types, char buffer[],	int f, int w, int p, int sz)
 {
-	char *rev_str;
 	char *str;
-	int i = 0, len, j;
+	int i, count = 0;
 
-	str = va_arg(list, char *);
+	UNUSED(buffer);
+	UNUSED(f);
+	UNUSED(w);
+	UNUSED(sz);
+
+	str = va_arg(types, char *);
+
 	if (str == NULL)
-		str = ")llun(";
-
-	len = _strlen(str);
-
-	rev_str = malloc(sizeof(char) * (len + 1));
-	if (rev_str == NULL)
-		return (NULL);
-
-	for (j = (len - 1); j >= 0; j--)
 	{
-		rev_str[i++] = str[j];
-	}
-	rev_str[i] = '\0';
+		UNUSED(p);
 
-	return (rev_str);
+		str = ")Null(";
+	}
+	for (i = 0; str[i]; i++)
+		;
+
+	for (i = i - 1; i >= 0; i--)
+	{
+		char z = str[i];
+
+		write(1, &z, 1);
+		count++;
+	}
+	return (count);
 }
