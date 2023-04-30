@@ -10,7 +10,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, fmted ,fmted_chars = 0;
+	int i, fmted, fmted_chars = 0;
 	int f, w, p, sz, buffer_index = 0;
 	va_list list;
 	char buffer[SIZE_BUFFER];

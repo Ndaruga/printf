@@ -56,8 +56,8 @@ int print_pointer(va_list types, char buffer[],	int f, int w, int p, int sz)
 /**
  * non_printable - Prints ascii-codes in hexadecimal of non printable chars
  * @types: List of arguments
- * @buffer: Buffer array 
- * @f:  flags active 
+ * @buffer: Buffer array
+ * @f:  flags active
  * @w:  w
  * @p: Precision
  * @sz: Size

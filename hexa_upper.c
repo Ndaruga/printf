@@ -3,7 +3,7 @@
 #include "stdlib.h"
 
 /**
- * print_hexa_upper - Prints an unsigned number in upper hexadecimal notation
+ * print_hexa_up - Prints an unsigned number in upper hexadecimal notation
  * @types: Argument list
  * @buffer: array for buffer
  * @f:  Calc flags
