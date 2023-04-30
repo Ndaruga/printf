@@ -2,51 +2,48 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-
 /**
- * itob - change integer to binary
- * @list: integer to change
- * Return: string with binary
+ * print_binary - Prints an unsigned number
+ * @types: Argument list
+ * @buffer: array for buffer
+ * @f:  Calc flags
+ * @w: get the width.
+ * @p: Precision
+ * @sz: Size
+ * Return: Numbers of char printed.
  */
-
-char *itob(va_list list)
+int print_binary(va_list types, char buffer[],
+	int f, int w, int p, int sz)
 {
-	int h = 0, twos = 1;
-	int i, m;
-	char *s;
+	unsigned int n, m, i, sum;
+	unsigned int a[32];
+	int cnt;
 
-	m = va_arg(list, int);
-	i = m;
+	UNUSED(buffer);
+	UNUSED(f);
+	UNUSED(w);
+	UNUSED(p);
+	UNUSED(sz);
 
-	/* malloc up to max int in binary */
-	s = malloc(sizeof(char) * 33);
-	if (s == NULL)
-		return (NULL);
-
-	/* account for negative numbers with '1' at index 0 */
-	if (m < 0)
-	{
-		s[0] = 1 + '0';
-		h++;
-		m *= -1;
-		i *= -1;
-	}
-
-	/* find biggest power of 2 it's divisible by */
-	while (m > 1)
+	n = va_arg(types, unsigned int);
+	m = 2147483648;
+	a[0] = n / m;
+	for (i = 1; i < 32; i++)
 	{
 		m /= 2;
-		twos *= 2;
+		a[i] = (n / m) % 2;
 	}
-
-	/* divide down and store binary num */
-	while (twos > 0)
+	for (i = 0, sum = 0, cnt = 0; i < 32; i++)
 	{
-		s[h++] = (i / twos + '0');
-		i %= twos;
-		twos /= 2;
-	}
-	s[h] = '\0';
+		sum += a[i];
+		if (sum || i == 31)
+		{
+			char z = '0' + a[i];
 
-	return (s);
+			write(1, &z, 1);
+			cnt++;
+		}
+	}
+	return (cnt);
 }
+

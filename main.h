@@ -22,7 +22,7 @@ int print_int(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_binary(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_unsigned(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_octal(va_list types, char buffer[], int f, int w, int p, int sz);
-int print_hexadeci(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_hexadec(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_hexa_up(va_list types, char buffer[], int f, int w, int p, int sz);
 int print_hexa(va_list types, char map_to[], char buffer[], int f,
 char flag_ch, int w, int p, int sz);

@@ -3,19 +3,21 @@
 #include "stdlib.h"
 
 /**
- * print_octal - Prints an unsigned number in octal notation
+ * print_hexa - Prints a hexadecimal number in lower or upper
  * @types: Argument list
+ * @map_to: Array of values to map the number to
  * @buffer: array for buffer
- * @f:  Calc flags
+ * @f:  Calculates active f
+ * @flag_ch: Calculates active f
  * @w: get the width
  * @p: Precision
  * @sz: Size
+ * @sz: sz specification
  * Return: Number of chars printed
  */
-int print_octal(va_list types, char buffer[],
-	int f, int w, int p, int sz)
+int print_hexa(va_list types, char map_to[], char buffer[],
+	int f, char flag_ch, int w, int p, int sz)
 {
-
 	int i = SIZE_BUFFER - 2;
 	unsigned long int num = va_arg(types, unsigned long int);
 	unsigned long int init_num = num;
@@ -31,12 +33,15 @@ int print_octal(va_list types, char buffer[],
 
 	while (num > 0)
 	{
-		buffer[i--] = (num % 8) + '0';
-		num /= 8;
+		buffer[i--] = map_to[num % 16];
+		num /= 16;
 	}
 
 	if (f & HASH && init_num != 0)
+	{
+		buffer[i--] = flag_ch;
 		buffer[i--] = '0';
+	}
 
 	i++;
 

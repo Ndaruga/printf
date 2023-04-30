@@ -2,74 +2,36 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-
 /**
- * _itos - converts an int a string
- * @div: multiples of 10
- * @length: length of number
- * @n: number to convert to string
- * Return: string
- **/
-
-char *_itos(int div, int length, int n)
+ * print_unsigned - Prints an unsigned number
+ * @types: List a of arguments
+ * @buffer: array for buffer
+ * @f:  Calc flags
+ * @w: get the width
+ * @p: Precision
+ * @sz: Size
+ * Return: Number of chars printed.
+ */
+int print_unsigned(va_list types, char buffer[],
+	int f, int w, int p, int sz)
 {
-	char *str;
-	int i = 0;
+	int i = SIZE_BUFFER - 2;
+	unsigned long int num = va_arg(types, unsigned long int);
 
-	str = malloc(sizeof(char) * length + 2);
-	if (str == NULL)
-		return (NULL);
+	num = convert_size_unsgnd(num, sz);
 
-	if (n < 0) /* account for negative sign */
+	if (num == 0)
+		buffer[i--] = '0';
+
+	buffer[SIZE_BUFFER - 1] = '\0';
+
+	while (num > 0)
 	{
-		str[0] = '-';
-		i++;
-	}
-	while (n < 0) /* convert each num to string */
-	{
-		str[i] = ((n / div) * -1 + '0'); /* *-1 to handle min int */
-		n = n % div;
-		div /= 10;
-		i++;
-	}
-	while (div >= 1) /* same, this case for positives */
-	{
-		str[i] = ((n / div) + '0');
-		n = n % div;
-		div /= 10;
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-/**
- * print_d - get length to put in _itos
- * @list: takes arg
- * Return: integer string
- **/
-char *print_d(va_list list)
-{
-	int length, div, n, temp;
-
-	n = va_arg(list, int);
-	temp = n;
-	length = 0;
-	div = 1;
-
-	if (n == 0)
-	{
-		length++;
-		return (_itos(div, length, n));
+		buffer[i--] = (num % 10) + '0';
+		num /= 10;
 	}
 
-	while (temp != 0)
-	{
-		length += 1;
-		if (length > 1)
-			div *= 10;
-		temp /= 10;
-	}
+	i++;
 
-	return (_itos(div, length, n));
+	return (write_unsgnd(0, i, buffer, f, w, p, sz));
 }
