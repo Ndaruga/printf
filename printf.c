@@ -3,88 +3,65 @@
 #include "stdarg.h"
 
 /**
- * _printf - custom printf fn
- *
- * @format: Initial string
- * @...:
- * Return: string with characters and format sprcifiers expanded
+ * _printf - custom Printf function
+ * @format: format.
+ * Return: fmted chars.
  */
-
 int _printf(const char *format, ...)
 {
-	int len = 0, total_len = 0, i = 0, j = 0;
+	int i, fmted ,fmted_chars = 0;
+	int f, w, p, sz, buffer_index = 0;
 	va_list list;
-	char *buffer, *str;
-	char* (*f)(va_list);
+	char buffer[SIZE_BUFFER];
 
 	if (format == NULL)
 		return (-1);
 
-	buffer = create_buffer();
-	if (buffer == NULL)
-		return (-1);
-
 	va_start(list, format);
 
-	while (format[i] != '\0')
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		if (format[i] != '%') /* copy format into buffer until you encounter '%' */
+		if (format[i] != '%')
 		{
-			len = check_buffer_overflow(buffer, len);
-			buffer[len++] = format[i++];
-			total_len++;
+			buffer[buffer_index++] = format[i];
+			if (buffer_index == SIZE_BUFFER)
+				print_buffer(buffer, &buffer_index);
+			/* write(1, &format[i], 1);*/
+			fmted_chars++;
 		}
-		else /* if %, ... */
+		else
 		{
-			i++;
-			if (format[i] == '\0')
-			{
-				va_end(list);
-				free(buffer);
+			print_buffer(buffer, &buffer_index);
+			f = buff_flags(format, &i);
+			w = buff_width(format, &i, list);
+			p = buff_precision(format, &i, list);
+			sz = SIZE_BUFFER(format, &i);
+			++i;
+			fmted = handle_print(format, &i, list, buffer,
+				f, w, p, sz);
+			if (fmted == -1)
 				return (-1);
-			}
-			if (format[i] == '%')
-			{
-				len = check_buffer_overflow(buffer, len);
-				buffer[len++] = format[i];
-				total_len++;
-			}
-			else
-			{
-				f = get_func(format[i]); /* grab function */
-				if (f == NULL)  /* handle fake id */
-				{
-					len = check_buffer_overflow(buffer, len);
-					buffer[len++] = '%'; total_len++;
-					buffer[len++] = format[i]; total_len++;
-				}
-				else /* return string, copy to buffer */
-				{
-					str = f(list);
-					if (str == NULL)
-					{
-						va_end(list);
-						free(buffer);
-						return (-1);
-					}
-					if (format[i] == 'c' && str[0] == '\0')
-					{
-						len = check_buffer_overflow(buffer, len);
-						buffer[len++] = '\0';
-						total_len++;
-					}
-					j = 0;
-					while (str[j] != '\0')
-					{
-						len = check_buffer_overflow(buffer, len);
-						buffer[len++] = str[j];
-						total_len++; j++;
-					}
-					free(str);
-				}
-			} i++;
+			fmted_chars += fmted;
 		}
 	}
-	write_buffer(buffer, len, list);
-	return (total_len);
+
+	print_buffer(buffer, &buffer_index);
+
+	va_end(list);
+
+	return (fmted_chars);
 }
+
+/**
+ * print_buffer - Print content of the buffer
+ * @buffer: Array of chars
+ * @buffer_index: Index  to add next char
+ */
+void print_buffer(char buffer[], int *buffer_index)
+{
+	if (*buffer_index > 0)
+		write(1, &buffer[0], *buffer_index);
+
+	*buffer_index = 0;
+}
+

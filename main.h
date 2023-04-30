@@ -2,43 +2,49 @@
 #define _MAIN_H_
 
 #include <stdarg.h>
+#define MINUS 1
+#define PLUS 2
+#define ZERO 4
+#define HASH 8
+#define SPACE 16
+#define UNUSED(x) (void)(x)
+#define SIZE_BUFFER 1024
+
 
 int _printf(const char *format, ...);
 
-char *_strcpy(char *dest, char *src);
+int print_char(va_list types, char buffer[],
+	int flags, int width, int precision, int size);
+int print_string(va_list types, char buffer[],
+	int flags, int width, int precision, int size);
+int print_percent(va_list types, char buffer[],
+	int flags, int width, int precision, int size);
 
-int _strlen(char *s);
-
-int check_buffer_overflow(char *buffer, int len);
-
-char *create_buffer(void);
-
-void write_buffer(char *buffer, int len, va_list list);
-
-char* (*get_func(char i))(va_list);
-
-char *rev_string(va_list list);
-
-char *rot13(va_list list);
-
-char *itoOctal(va_list list);
-
-char *itob(va_list list);
-
-char *print_s(va_list list);
-char *print_c(va_list list);
-char *print_d(va_list list);
 
 /**
- * struct types - struct
- * @id: identifier of type to print (e.g. c means char)
- * @func: ptr to functions that print according to identifier (e.g. print_c)
+ * typedef struct fmt fmt_t - Struct op
+ *
+ * @fmt: The format.
+ * @fm_t: The function associated.
  */
 
-typedef struct types
+typedef struct fmt fmt_t;
+
+int _printf(const char *format, ...);
+int handle_print(const char *fmt, int *i,
+va_list list, char buffer[], int f, int w, int p, int sz);
+
+
+/**
+ * struct fmt - Struct op
+ *
+ * @fmt: The format.
+ * @fn: The function associated.
+ */
+struct fmt
 {
-	char id;
-	char* (*func)(va_list);
-} print_fn;
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
+};
 
 #endif
