@@ -12,8 +12,7 @@
  * @sz: Size
  * Return: Number of chars printed
  */
-int print_hexadec(va_list types, char buffer[],
-	int f, int w, int p, int sz)
+int print_hexadec(va_list types, char buffer[],	int f, int w, int p, int sz)
 {
 	return (print_hexa(types, "0123456789abcdef", buffer,
 		f, 'x', w, p, sz));

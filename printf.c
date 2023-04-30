@@ -35,7 +35,7 @@ int _printf(const char *format, ...)
 			f = buff_flags(format, &i);
 			w = buff_width(format, &i, list);
 			p = buff_precision(format, &i, list);
-			sz = SIZE_BUFFER(format, &i);
+			sz = buff_size(format, &i);
 			++i;
 			fmted = handle_print(format, &i, list, buffer,
 				f, w, p, sz);

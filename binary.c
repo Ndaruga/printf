@@ -12,8 +12,7 @@
  * @sz: Size
  * Return: Numbers of char printed.
  */
-int print_binary(va_list types, char buffer[],
-	int f, int w, int p, int sz)
+int print_binary(va_list types, char buffer[], int f, int w, int p, int sz)
 {
 	unsigned int n, m, i, sum;
 	unsigned int a[32];

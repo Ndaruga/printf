@@ -12,8 +12,7 @@
  * @sz: Size
  * Return: Number of chars printed
  */
-int print_char(va_list types, char buffer[],
-	int f, int w, int p, int sz)
+int print_char(va_list types, char buffer[], int f, int w, int p, int sz)
 {
 	char c = va_arg(types, int);
 

@@ -34,6 +34,7 @@ int buff_size(const char *format, int *i);
 
 int print_reverse(va_list types, char buffer[],	int f, int w, int p, int sz);
 int print_rot13str(va_list types, char buffer[], int f, int w, int p, int sz);
+int print_octal(va_list types, char buffer[], int f, int w, int p, int sz)
 
 
 

@@ -12,11 +12,10 @@
  * @w: get the width
  * @p: Precision
  * @sz: Size
- * @sz: sz specification
  * Return: Number of chars printed
  */
-int print_hexa(va_list types, char map_to[], char buffer[],
-	int f, char flag_ch, int w, int p, int sz)
+int print_hexa(va_list types, char map_to[], char buffer[],	int f,
+char flag_ch, int w, int p, int sz)
 {
 	int i = SIZE_BUFFER - 2;
 	unsigned long int num = va_arg(types, unsigned long int);

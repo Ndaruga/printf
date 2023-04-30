@@ -12,8 +12,7 @@
  * @sz: Size
  * Return: Number of chars printed
  */
-int print_octal(va_list types, char buffer[],
-	int f, int w, int p, int sz)
+int print_octal(va_list types, char buffer[], int f, int w, int p, int sz)
 {
 
 	int i = SIZE_BUFFER - 2;
