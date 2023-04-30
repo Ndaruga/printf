@@ -50,9 +50,9 @@ int write_unsgnd(int is_negative, int ind, char buffer[], int f,
 int w, int p, int sz);
 
 
-int is_printable(char);
-int append_hexa_code(char, char[], int);
-int is_digit(char);
+int printable(char);
+int append_hexa(char, char[], int);
+int digit(char);
 long int convert_size_number(long int num, int sz);
 long int convert_size_unsgnd(unsigned long int num, int sz);
 
@@ -68,8 +68,8 @@ long int convert_size_unsgnd(unsigned long int num, int sz);
 typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
-int handle_print(const char *fmt, int *i,
-va_list list, char buffer[], int f, int w, int p, int sz);
+int handle_print(const char *fmt, int *i, va_list list, char buffer[],
+int f, int w, int p, int sz);
 
 
 /**

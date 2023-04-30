@@ -49,7 +49,7 @@ int buff_precision(const char *format, int *i, va_list list)
 
 	for (indx += 1; format[indx] != '\0'; indx++)
 	{
-		if (is_digit(format[indx]))
+		if (digit(format[indx]))
 		{
 			p *= 10;
 			p += format[indx] - '0';
@@ -85,7 +85,7 @@ int buff_width(const char *format, int *i, va_list list)
 
 	for (indx = *i + 1; format[indx] != '\0'; indx++)
 	{
-		if (is_digit(format[indx]))
+		if (digit(format[indx]))
 		{
 			w *= 10;
 			w += format[indx] - '0';
