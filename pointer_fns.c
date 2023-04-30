@@ -1,6 +1,7 @@
 #include "main.h"
 #include "stdarg.h" /* va list */
 #include "stdlib.h"
+#include <unistd.h>
 
 /**
  * print_pointer - Prints the value of a pointer variable
@@ -12,8 +13,7 @@
  * @sz: Size
  * Return: Number of chars printed.
  */
-int print_pointer(va_list types, char buffer[],
-	int f, int w, int p, int sz)
+int print_pointer(va_list types, char buffer[],	int f, int w, int p, int sz)
 {
 	char extra_c = 0, padd = ' ';
 	int ind = SIZE_BUFFER - 2, len = 2, padd_start = 1; /* len=2, for '0x' */

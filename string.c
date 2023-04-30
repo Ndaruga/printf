@@ -1,6 +1,7 @@
 #include "main.h"
 #include "stdarg.h" /* va list */
 #include "stdlib.h"
+#include <unistd.h>
 
 /**
  * print_string - Prints a string

@@ -1,6 +1,7 @@
 #include "main.h"
 #include "stdlib.h"
 #include "stdarg.h"
+#include <unistd.h>
 
 /**
  * _printf - custom Printf function
@@ -26,7 +27,6 @@ int _printf(const char *format, ...)
 			buffer[buffer_index++] = format[i];
 			if (buffer_index == SIZE_BUFFER)
 				print_buffer(buffer, &buffer_index);
-			/* write(1, &format[i], 1);*/
 			fmted_chars++;
 		}
 		else

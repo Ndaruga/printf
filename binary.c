@@ -1,6 +1,7 @@
 #include "main.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include <unistd.h>
 
 /**
  * print_binary - Prints an unsigned number

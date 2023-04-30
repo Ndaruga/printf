@@ -16,5 +16,5 @@ int print_char(va_list types, char buffer[], int f, int w, int p, int sz)
 {
 	char c = va_arg(types, int);
 
-	return (handle_write_char(c, buffer, f, w, p, sz));
+	return (write_char(c, buffer, f, w, p, sz));
 }
