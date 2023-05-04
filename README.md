@@ -57,4 +57,7 @@ Hello W0rld
 * The main _printf function can be separated into more modular shorter functions
 * More functionality can still be added (e.g. support field width specifiers, etc)
 
+### Synopsis
+> The project contains the research works done by Francis Ndaruga and Martin Kihungi.
+
 ---
